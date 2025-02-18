@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Search, PlusCircle, Bell, User, LogOut } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -36,23 +37,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <PlusCircle size={20} />
                 <span>Create</span>
               </Link>
-              <button className="relative">
+              <motion.button whileHover={{ scale: 1.1 }} className="relative">
                 <Bell size={20} className="text-content-secondary hover:text-neon-green" />
                 <span className="absolute -top-1 -right-1 bg-neon-pink text-content-primary text-xs rounded-full w-4 h-4 flex items-center justify-center">
                   3
                 </span>
-              </button>
+              </motion.button>
               <div className="flex items-center gap-4 border-l border-surface-light pl-4">
                 <Link to="/profile" className="flex items-center gap-2">
-                  <img
+                  <motion.img
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&q=80"
                     alt="Profile"
                     className="w-8 h-8 rounded-full border-2 border-surface-light"
+                    whileHover={{ scale: 1.1 }}
                   />
                 </Link>
-                <button className="text-content-secondary hover:text-neon-pink">
+                <motion.button whileHover={{ scale: 1.1 }} className="text-content-secondary hover:text-neon-pink">
                   <LogOut size={20} />
-                </button>
+                </motion.button>
               </div>
             </div>
           </div>

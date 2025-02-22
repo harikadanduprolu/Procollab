@@ -14,7 +14,7 @@ import NotFound from "./pages/NotFound";
 function App() {
   return (
     <Router>
-      <Layout>
+      <Layout children={undefined} isAuthenticated={true}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<Explore />} />

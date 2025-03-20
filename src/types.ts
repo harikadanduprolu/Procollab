@@ -1,4 +1,10 @@
 export interface Project {
+  discussionForum: string | undefined;
+  demoVideo: any;
+  pitchDeck: string | undefined;
+  fundingDetails: ReactNode;
+  githubRepo: string | undefined;
+  techStack: any;
   id: string;
   title: string;
   description: string;

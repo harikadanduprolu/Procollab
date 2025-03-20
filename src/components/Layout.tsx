@@ -1,15 +1,15 @@
-import React, { useState, ReactNode } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Home, Search, PlusCircle, Bell, LogOut, X } from "lucide-react";
+import React, { ReactNode } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Home, Search, PlusCircle, Bell, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface PublicLayoutProps {
   children: ReactNode;
-  openAuthModal: (type: "login" | "signup") => void;
 }
 
-export function PublicLayout({ children, openAuthModal }: PublicLayoutProps) {
+export function PublicLayout({ children }: PublicLayoutProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const isActive = (path: string) => location.pathname === path;
 
   return (
@@ -25,10 +25,10 @@ export function PublicLayout({ children, openAuthModal }: PublicLayoutProps) {
               <span>Explore</span>
             </Link>
             <div className="flex gap-4">
-              <motion.button whileHover={{ scale: 1.1 }} className="px-4 py-2 rounded-lg text-content-secondary hover:bg-neon-blue hover:text-white" onClick={() => openAuthModal("login")}>
+              <motion.button whileHover={{ scale: 1.1 }} className="px-4 py-2 rounded-lg text-content-secondary hover:bg-neon-blue hover:text-white" onClick={() => navigate("/login")}>
                 Log In
               </motion.button>
-              <motion.button whileHover={{ scale: 1.1 }} className="px-4 py-2 rounded-lg text-content-secondary hover:bg-neon-purple hover:text-white" onClick={() => openAuthModal("signup")}>
+              <motion.button whileHover={{ scale: 1.1 }} className="px-4 py-2 rounded-lg text-content-secondary hover:bg-neon-purple hover:text-white" onClick={() => navigate("/signup")}>
                 Sign Up
               </motion.button>
             </div>
@@ -101,39 +101,5 @@ interface LayoutProps {
 }
 
 export function Layout({ children, isAuthenticated }: LayoutProps) {
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authType, setAuthType] = useState<"login" | "signup">("login");
-
-  const openAuthModal = (type: "login" | "signup") => {
-    setAuthType(type);
-    setShowAuthModal(true);
-  };
-
-  const closeAuthModal = () => setShowAuthModal(false);
-
-  return (
-    <>
-      {isAuthenticated ? <PrivateLayout>{children}</PrivateLayout> : <PublicLayout children={children} openAuthModal={openAuthModal} />}
-      {showAuthModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} className="bg-surface-light p-6 rounded-lg shadow-lg w-96">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-content-primary">{authType === "login" ? "Log In" : "Sign Up"}</h2>
-              <button onClick={closeAuthModal} className="text-content-secondary hover:text-neon-pink">
-                <X size={20} />
-              </button>
-            </div>
-            <form>
-              <input type="email" placeholder="Email" className="w-full p-2 mb-4 border rounded-lg" required />
-              <input type="password" placeholder="Password" className="w-full p-2 mb-4 border rounded-lg" required />
-              {authType === "signup" && <input type="text" placeholder="Username" className="w-full p-2 mb-4 border rounded-lg" required />}
-              <motion.button whileHover={{ scale: 1.05 }} className="w-full bg-neon-blue text-white py-2 rounded-lg">
-                {authType === "login" ? "Log In" : "Sign Up"}
-              </motion.button>
-            </form>
-          </motion.div>
-        </div>
-      )}
-    </>
-  );
+  return isAuthenticated ? <PrivateLayout>{children}</PrivateLayout> : <PublicLayout>{children}</PublicLayout>;
 }

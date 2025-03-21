@@ -32,7 +32,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#1A1A2E]">
+    <div className="min-h-screen flex items-center justify-center bg-background ">
       <div className="bg-[#16213E] p-8 rounded-lg shadow-lg w-96 border border-[#0F3460]">
         <h2 className="text-3xl font-bold text-[#16B8F3] mb-6 text-center">Sign Up</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}

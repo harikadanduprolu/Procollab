@@ -104,25 +104,51 @@ export function HomePage() {
             <ArrowRight size={16} />
           </Link>
         </motion.div>
-        {/* Placeholder for project cards */}
+        {/* Project Cards with View Details */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.9 }}
         >
-          <div className="bg-surface/80 rounded-lg p-4 border border-surface-light hover:border-neon-purple/50 transition-all transform hover:scale-105">
-            <h4 className="text-lg font-semibold text-content-primary">AI-Powered Chatbot</h4>
-            <p className="text-content-secondary">An interactive chatbot that helps students learn AI concepts efficiently.</p>
-          </div>
-          <div className="bg-surface/80 rounded-lg p-4 border border-surface-light hover:border-neon-blue/50 transition-all transform hover:scale-105">
-            <h4 className="text-lg font-semibold text-content-primary">Collaborative Whiteboard</h4>
-            <p className="text-content-secondary">An online collaborative space to brainstorm and visualize ideas in real-time.</p>
-          </div>
-          <div className="bg-surface/80 rounded-lg p-4 border border-surface-light hover:border-neon-pink/50 transition-all transform hover:scale-105">
-            <h4 className="text-lg font-semibold text-content-primary">IoT-Based Smart Home</h4>
-            <p className="text-content-secondary">A system that automates home appliances with IoT integration.</p>
-          </div>
+          {[
+            {
+              title: 'AI-Powered Chatbot',
+              description: 'An interactive chatbot that helps students learn AI concepts efficiently.',
+              link: '/projects/ai-chatbot',
+              hoverColor: 'hover:border-neon-purple/50',
+            },
+            {
+              title: 'Collaborative Whiteboard',
+              description: 'An online collaborative space to brainstorm and visualize ideas in real-time.',
+              link: '/projects/whiteboard',
+              hoverColor: 'hover:border-neon-blue/50',
+            },
+            {
+              title: 'IoT-Based Smart Home',
+              description: 'A system that automates home appliances with IoT integration.',
+              link: '/projects/smart-home',
+              hoverColor: 'hover:border-neon-pink/50',
+            },
+          ].map((project, index) => (
+            <motion.div
+              key={index}
+              className={`bg-surface/80 rounded-lg p-4 border border-surface-light ${project.hoverColor} transition-all transform hover:scale-105`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 * index }}
+            >
+              <h4 className="text-lg font-semibold text-content-primary">{project.title}</h4>
+              <p className="text-content-secondary mb-4">{project.description}</p>
+              <Link
+                to={project.link}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-neon-blue text-content-primary rounded-lg hover:bg-muted-blue transition-all hover:scale-105"
+              >
+                View Details
+                <ArrowRight size={16} />
+              </Link>
+            </motion.div>
+          ))}
         </motion.div>
       </section>
     </div>

@@ -1,9 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Rocket, Users, Target } from 'lucide-react';
+import { ArrowRight, Rocket, Users, Target, X } from 'lucide-react';
 
 export function HomePage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCreateProject = () => {
+    if (isLoggedIn) {
+      navigate('/create');
+    } else {
+      setShowModal(true);
+    }
+  };
+
   return (
     <div className="space-y-16">
       {/* Hero Section */}
@@ -38,13 +50,13 @@ export function HomePage() {
             Explore Projects
             <ArrowRight size={20} />
           </Link>
-          <Link
-            to="/create"
+          <button
+            onClick={handleCreateProject}
             className="flex items-center gap-2 px-6 py-3 border-2 border-neon-blue text-neon-blue rounded-lg hover:bg-surface transition-all hover:scale-105 hover:shadow-neon-blue"
           >
             Create Project
             <Rocket size={20} />
-          </Link>
+          </button>
         </motion.div>
       </section>
 
@@ -76,7 +88,7 @@ export function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 * index }}
-            whileHover={{ scale: 1.05, boxShadow: '0 10px 25px rgba(255, 0, 255, 0.2)' }}
+            whileHover={{ scale: 1.05 }}
           >
             <div className="w-12 h-12 bg-surface-dark rounded-lg flex items-center justify-center mb-4">
               {feature.icon}
@@ -86,6 +98,44 @@ export function HomePage() {
           </motion.div>
         ))}
       </section>
+
+      {/* Login/Signup Modal */}
+      {showModal && (
+        <motion.div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <div className="bg-surface-light rounded-lg p-6 w-96 shadow-lg relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-3 right-3 text-content-secondary hover:text-content-primary"
+            >
+              <X size={20} />
+            </button>
+            <h3 className="text-2xl font-bold text-content-primary mb-4">Login or Sign Up</h3>
+            <p className="text-content-secondary mb-6">
+              You need to log in or sign up to create a project.
+            </p>
+            <div className="flex flex-col gap-4">
+              <Link
+                to="/login"
+                className="bg-neon-blue text-content-primary px-4 py-2 rounded-lg text-center hover:bg-muted-blue transition-all hover:scale-105"
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="border-2 border-neon-purple text-neon-purple px-4 py-2 rounded-lg text-center hover:bg-muted-purple transition-all hover:scale-105"
+              >
+                Sign Up
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      )}
+  
 
       {/* Featured Projects */}
       <section>

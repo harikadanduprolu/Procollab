@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Dark Theme */
+body {
+  @apply bg-[#1A1A2E] text-white;
+}
+
+input {
+  @apply bg-[#0F3460] text-white;
+}
+
+input:focus {
+  @apply ring-2 ring-[#7F56D9] outline-none;
+}

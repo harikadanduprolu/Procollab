@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Rocket, Users, Target, X } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export function HomePage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isAuthenticated } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const handleCreateProject = () => {
-    if (isLoggedIn) {
+    if (isAuthenticated) {
       navigate('/create');
     } else {
       setShowModal(true);

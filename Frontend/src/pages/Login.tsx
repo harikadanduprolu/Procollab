@@ -17,7 +17,8 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/login", formData);
+      const res = await axios.post("http://localhost:5000/api/user/signin", formData);
+
       if (res.data.success) {
         navigate("/dashboard");
       } else {

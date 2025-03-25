@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   dateOfBirth: { type: Date, required: true },
   graduationYear: { type: Number, required: true },
-  course: { type: String, enum: ["CSE", "ECE", "EEE"], required: true },
+  course: { type: String, enum: ["CSE", "ECE", "EEE","IT"], required: true },
   skills: { type: [String], required: true }, // Array of selected skills
   college: { type: String, required: true }, // College name
   githubLink: { type: String, default: "" }, // Optional GitHub profile link

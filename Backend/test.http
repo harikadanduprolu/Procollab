@@ -3,16 +3,17 @@ POST http://localhost:5000/api/user/signup
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "johndoe@example.com",
-  "password": "securepassword",
+  
+  "name": "John ",
+  "email": "john@example.com",
+  "password": "secure",
   "dateOfBirth": "2000-01-01",
   "graduationYear": 2025,
   "course": "CSE",
   "skills": ["C", "C++", "Python"],
   "college":"VNR VJIET",
   "githubLink":"https://abc",
-  "LinkedInLink":"https://abd"
+  "linkedInLink":"abd.in"
 }
 
 ### SIGNIN Request

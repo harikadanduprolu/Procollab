@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Custom Dark Theme */
 body {
   @apply bg-[#1A1A2E] text-white;
